@@ -48,7 +48,7 @@ export default function RootLayout({
             rel="noopener noreferrer"
             className="text-xs text-muted-foreground hover:text-primary transition-colors"
           >
-            Aplicacion web disenada y desarrollada por Hako Studio
+            Aplicación web diseñada y desarrollada por Hako Studio
           </a>
         </footer>
         <Analytics />
