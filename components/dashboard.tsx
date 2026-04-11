@@ -47,7 +47,18 @@ function HomeView({ onSelectFixture }: { onSelectFixture: (f: Fixture) => void }
     )
   }
 
-  const isPast = (d: string) => new Date(d) < new Date(new Date().toDateString())
+  const isPast = (d: string) => {
+    // Le agregamos "T12:00:00" para forzar que caiga al mediodía en tu hora local 
+    // y evitar que salte al día anterior por la diferencia de zona horaria.
+    const matchDate = new Date(d + "T12:00:00");
+    matchDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Retorna true solo si HOY es estrictamente mayor a la fecha del partido
+    return today > matchDate;
+  };
 
   // Group fixtures by month
   const fixturesByMonth = fixtures.reduce((acc, f) => {
