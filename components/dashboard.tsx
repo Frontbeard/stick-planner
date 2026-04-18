@@ -97,7 +97,7 @@ function HomeView({ onSelectFixture }: { onSelectFixture: (f: Fixture) => void }
         <div className="mt-5 grid grid-cols-3 gap-3">
           {[
             { label: "Plantel", val: squad.length },
-            { label: "Posición Torneo", val: 11 },
+            { label: "Posición Torneo", val: 12 },
             { label: "Puntos", val: 3 },
           ].map(s => (
             <div key={s.label} className="text-center bg-secondary/40 rounded-xl py-2.5 px-3">
