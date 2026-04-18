@@ -48,16 +48,18 @@ function HomeView({ onSelectFixture }: { onSelectFixture: (f: Fixture) => void }
   }
 
   const isPast = (d: string) => {
-    // Le agregamos "T12:00:00" para forzar que caiga al mediodía en tu hora local 
-    // y evitar que salte al día anterior por la diferencia de zona horaria.
-    const matchDate = new Date(d + "T12:00:00");
-    matchDate.setHours(0, 0, 0, 0);
+    // 1. Separamos el string de la fecha (asume formato "YYYY-MM-DD")
+    const [year, month, day] = d.split('-').map(Number);
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    // 2. Creamos la fecha exacta del partido pero al final del día (23:59:59)
+    // Nota: month - 1 porque en JavaScript los meses van de 0 a 11
+    const endOfMatchDay = new Date(year, month - 1, day, 23, 59, 59);
+    
+    // 3. Tomamos el momento exacto actual
+    const now = new Date();
 
-    // Retorna true solo si HOY es estrictamente mayor a la fecha del partido
-    return today > matchDate;
+    // 4. Retorna true (se bloquea) SOLO si ya pasamos la medianoche de la fecha del partido
+    return now > endOfMatchDay;
   };
 
   // Group fixtures by month
